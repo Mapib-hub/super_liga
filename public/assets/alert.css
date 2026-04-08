@@ -1,0 +1,57 @@
+.contenedor-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+
+.toast {
+  background: #fff;
+  border-left: 5px solid #bd00ff;
+  padding: 15px 20px;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 300px;
+  animation: entrada 0.3s ease forwards;
+}
+
+/* Animación de entrada */
+@keyframes entrada {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Clase para cuando se va */
+.toast.cerrando {
+  animation: salida 0.3s ease forwards;
+}
+
+@keyframes salida {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+/* En tu CSS */
+.htmx-indicator {
+  display: none;
+}
+.htmx-request.htmx-indicator {
+  display: flex;
+}

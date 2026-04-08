@@ -44,7 +44,38 @@ class JugadorModel extends Model
     {
         return $this->where('slug', esc($slug))->first();
     }
+    /**
+     * Obtiene todos los jugadores con el nombre de su institución vinculada.
+     */
+    public function obtenerTodosConInstitucion()
+    {
+        return $this->select('jugadores.*, instituciones.nombre as institucion_nombre')
+            ->join('instituciones', 'instituciones.id = jugadores.institucion_id')
+            ->orderBy('jugadores.id', 'DESC')
+            ->findAll();
+    }
 
+    /**
+     * Obtiene los jugadores de una institución específica (útil para delegados).
+     */
+    public function obtenerPorInstitucion($institucionId)
+    {
+        return $this->select('jugadores.*, instituciones.nombre as institucion_nombre')
+            ->join('instituciones', 'instituciones.id = jugadores.institucion_id')
+            ->where('jugadores.institucion_id', $institucionId)
+            ->orderBy('jugadores.apellidos', 'ASC')
+            ->findAll();
+    }
+
+    /**
+     * Busca un jugador por ID incluyendo los datos de su club.
+     */
+    public function obtenerDetalle($id)
+    {
+        return $this->select('jugadores.*, instituciones.nombre as institucion_nombre')
+            ->join('instituciones', 'instituciones.id = jugadores.institucion_id')
+            ->find($id);
+    }
     protected $useTimestamps = true;
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';

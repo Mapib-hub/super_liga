@@ -1,0 +1,414 @@
+/* =========================================
+   VARIABLES NEON (SISTEMA DE DISEÑO)
+   ========================================= */
+:root {
+  --dark-bg: #1a1a1a;
+  --dark-sidebar: #0a011a;
+  --dark-card: #0d0221;
+  --dark-border: #22054d;
+  --neon-purple: #bd00ff;
+  --neon-cyan: #00ffff;
+  --neon-pink: #ff005c;
+  --text-main: #e0e0e0;
+  --text-muted: #64748b;
+}
+
+/* =========================================
+   RESET & BASE
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-main);
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  margin: 0;
+  line-height: 1.5;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+/* =========================================
+   ESTRUCTURA GENERAL (LAYOUT)
+   ========================================= */
+.admin-wrapper {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--dark-sidebar);
+  border-right: 1px solid var(--dark-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 50;
+}
+
+.sidebar-brand {
+  padding: 2rem;
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.sidebar-tagline {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--neon-cyan);
+  opacity: 0.7;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.main-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: radial-gradient(circle at top right, #130229, #1a1a1a);
+}
+
+.top-bar {
+  height: 64px;
+  border-bottom: 1px solid var(--dark-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background: rgba(10, 1, 26, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+/* =========================================
+   NAVEGACIÓN (SIDEBAR)
+   ========================================= */
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: 12px;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link i {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+}
+
+.nav-link:hover {
+  background: rgba(189, 0, 255, 0.1);
+  color: var(--neon-purple);
+}
+
+.nav-link:hover i {
+  opacity: 1;
+  filter: drop-shadow(0 0 5px var(--neon-purple));
+}
+
+.nav-section-title {
+  font-size: 10px;
+  color: var(--neon-cyan);
+  padding: 20px 12px 10px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+/* =========================================
+   TABLAS NEON
+   ========================================= */
+.table-container {
+  background: var(--dark-sidebar);
+  border-radius: 1.5rem;
+  padding: 5px;
+  border: 1px solid var(--dark-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th {
+  background: rgba(34, 5, 77, 0.5);
+  padding: 15px;
+  text-align: left;
+  color: var(--neon-cyan);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.admin-table td {
+  padding: 15px;
+  border-bottom: 1px solid var(--dark-border);
+  color: var(--text-main);
+  vertical-align: middle;
+}
+
+.admin-table tr:hover {
+  background: rgba(189, 0, 255, 0.05);
+}
+
+.logo-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--dark-border);
+}
+
+/* =========================================
+   FORMULARIOS Y ENTRADAS
+   ========================================= */
+.container-form {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.dark-card-form {
+  background: var(--dark-sidebar);
+  border: 1px solid var(--dark-border);
+  border-radius: 2.5rem;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label,
+.label-left {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group textarea,
+.neon-textarea {
+  width: 100%;
+  background: #000 !important;
+  border: 1px solid var(--dark-border);
+  border-radius: 15px;
+  padding: 15px;
+  color: white;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.neon-textarea:focus {
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 10px rgba(189, 0, 255, 0.2);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.section-title {
+  color: var(--neon-cyan);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 1px solid var(--dark-border);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* =========================================
+   BOTONES Y ACCIONES
+   ========================================= */
+.btn-neon {
+  background: var(--neon-purple);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-neon:hover {
+  box-shadow: 0 0 20px rgba(189, 0, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-neon-save {
+  background: var(--neon-purple);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 20px rgba(189, 0, 255, 0.3);
+  transition: 0.3s;
+}
+
+.btn-neon-save:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(189, 0, 255, 0.5);
+}
+
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  transition: 0.3s;
+}
+
+.btn-edit {
+  color: var(--neon-cyan);
+}
+.btn-delete {
+  color: var(--neon-pink);
+}
+
+.btn-edit:hover i {
+  filter: drop-shadow(0 0 8px var(--neon-cyan));
+  transform: scale(1.2);
+}
+.btn-delete:hover i {
+  filter: drop-shadow(0 0 8px var(--neon-pink));
+  transform: scale(1.2);
+}
+
+/* =========================================
+   COMPONENTES ESPECIALES
+   ========================================= */
+.upload-zone {
+  background: #000;
+  border: 2px dashed var(--dark-border);
+  border-radius: 20px;
+  padding: 30px;
+  position: relative;
+  cursor: pointer;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-placeholder i {
+  color: var(--dark-border);
+  margin-bottom: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.preview-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--neon-purple);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite; /* Corregido */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================
+   UTILIDADES RÁPIDAS
+   ========================================= */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+.flex-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.text-center {
+  text-align: center;
+}
+.text-cyan-tag {
+  color: var(--neon-cyan);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.error-text {
+  color: var(--neon-pink);
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 5px;
+}

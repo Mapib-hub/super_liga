@@ -1,115 +1,97 @@
-<div class="max-w-4xl mx-auto">
-    <div class="flex justify-between items-center mb-8">
+<div class="container-form">
+    <div class="flex-between mb-8">
         <div>
-            <h2 class="text-3xl font-black text-slate-800 uppercase tracking-tighter">Nueva <span
-                    class="text-indigo-600">Institución</span></h2>
-            <p class="text-slate-500 text-sm font-medium">Registro oficial de clubes</p>
+            <h2 class="text-neon-purple font-sport" style="font-size: 2.5rem; margin: 0;">
+                Nueva <span style="color: var(--text-main);">Institución</span>
+            </h2>
+            <p class="text-cyan-tag">Registro oficial de clubes</p>
         </div>
         <a href="<?= base_url('admin/instituciones') ?>" hx-get="<?= base_url('admin/instituciones') ?>"
-            hx-target="#main-content" hx-push-url="true"
-            class="flex items-center gap-2 text-slate-400 hover:text-indigo-600 font-bold transition cursor-pointer">
-            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            hx-target="#main-content" hx-push-url="true" class="btn-back">
+            <i data-lucide="arrow-left"></i>
             Volver al listado
         </a>
     </div>
 
     <form hx-post="<?= base_url('admin/instituciones/guardar') ?>" hx-target="#main-content"
-        hx-encoding="multipart/form-data" enctype="multipart/form-data"
-        class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100">
+        hx-encoding="multipart/form-data" enctype="multipart/form-data" class="dark-card-form">
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid-3">
+            <div class="form-section">
+                <h3 class="section-title">Identidad</h3>
 
-            <div class="space-y-6">
-                <h3 class="text-indigo-600 font-black text-xs uppercase tracking-widest border-b pb-2">Identidad</h3>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Nombre del Club</label>
+                <div class="form-group">
+                    <label>Nombre del Club</label>
                     <input type="text" name="nombre" value="<?= old('nombre') ?>"
-                        class="w-full bg-slate-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-indigo-500 transition <?= (isset($validation) && $validation->hasError('nombre')) ? 'ring-2 ring-red-500' : '' ?>">
+                        class="<?= (isset($validation) && $validation->hasError('nombre')) ? 'input-error' : '' ?>"
+                        placeholder="Ej: Club Deportivo Neon">
                     <?php if (isset($validation) && $validation->hasError('nombre')): ?>
-                    <p class="text-red-500 text-[10px] mt-1 font-bold italic uppercase">
-                        <?= $validation->getError('nombre') ?></p>
+                    <p class="error-text"><?= $validation->getError('nombre') ?></p>
                     <?php endif; ?>
                 </div>
 
-                <div class="space-y-6 text-center" x-data="{ imageUrl: null }">
-                    <label class="block text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 text-left">
-                        Logo de la Institución
-                    </label>
-
+                <div x-data="{ imageUrl: null }" class="text-center">
+                    <label class="label-left">Logo de la Institución</label>
                     <div
-                        class="bg-slate-50 border-2 border-dashed <?= (isset($validation) && $validation->hasError('logo')) ? 'border-red-300' : 'border-slate-200' ?> rounded-3xl p-8 relative overflow-hidden group">
+                        class="upload-zone <?= (isset($validation) && $validation->hasError('logo')) ? 'border-error' : '' ?>">
                         <template x-if="!imageUrl">
-                            <div class="space-y-2">
-                                <i data-lucide="image-plus" class="w-10 h-10 mx-auto text-slate-300"></i>
-                                <p class="text-[10px] text-slate-400 font-bold uppercase">Click para subir logo</p>
+                            <div class="upload-placeholder">
+                                <i data-lucide="image-plus"></i>
+                                <p>Click para subir logo</p>
                             </div>
                         </template>
 
                         <template x-if="imageUrl">
-                            <img :src="imageUrl"
-                                class="mx-auto h-32 w-32 object-contain rounded-xl shadow-lg transition-all group-hover:scale-105">
+                            <img :src="imageUrl" class="preview-img">
                         </template>
 
-                        <input type="file" name="logo" accept="image/*"
-                            class="absolute inset-0 opacity-0 cursor-pointer"
+                        <input type="file" name="logo" accept="image/*" class="input-file-hidden"
                             @change="const file = $event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = (e) => { imageUrl = e.target.result; }; reader.readAsDataURL(file); }">
                     </div>
-                    <?php if (isset($validation) && $validation->hasError('logo')): ?>
-                    <p class="text-red-500 text-[10px] mt-1 font-bold italic uppercase text-left">
-                        <?= $validation->getError('logo') ?></p>
-                    <?php endif; ?>
 
-                    <button type="button" x-show="imageUrl" @click="imageUrl = null"
-                        class="text-[10px] font-black text-red-500 uppercase tracking-tighter hover:underline">
+                    <button type="button" x-show="imageUrl" @click="imageUrl = null" class="btn-remove-img">
                         Quitar imagen
                     </button>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <h3 class="text-indigo-600 font-black text-xs uppercase tracking-widest border-b pb-2">Ubicación</h3>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Estadio Principal</label>
-                    <input type="text" name="estadio" value="<?= old('estadio') ?>"
-                        class="w-full bg-slate-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-indigo-500 transition">
+            <div class="form-section">
+                <h3 class="section-title">Ubicación</h3>
+                <div class="form-group">
+                    <label>Estadio Principal</label>
+                    <input type="text" name="estadio" value="<?= old('estadio') ?>" placeholder="Nombre del estadio">
                 </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Link Google Maps</label>
-                    <input type="text" name="maps" placeholder="https://goo.gl/maps/..." value="<?= old('maps') ?>"
-                        class="w-full bg-slate-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-indigo-500 transition">
+                <div class="form-group">
+                    <label>Link Google Maps</label>
+                    <input type="text" name="maps" placeholder="https://goo.gl/maps/..." value="<?= old('maps') ?>">
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <h3 class="text-indigo-600 font-black text-xs uppercase tracking-widest border-b pb-2">Contacto</h3>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Email Oficial</label>
+            <div class="form-section">
+                <h3 class="section-title">Contacto</h3>
+                <div class="form-group">
+                    <label>Email Oficial</label>
                     <input type="email" name="email_contacto" value="<?= old('email_contacto') ?>"
-                        class="w-full bg-slate-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-indigo-500 transition <?= (isset($validation) && $validation->hasError('email_contacto')) ? 'ring-2 ring-red-500' : '' ?>">
+                        class="<?= (isset($validation) && $validation->hasError('email_contacto')) ? 'input-error' : '' ?>">
                     <?php if (isset($validation) && $validation->hasError('email_contacto')): ?>
-                    <p class="text-red-500 text-[10px] mt-1 font-bold italic uppercase">
-                        <?= $validation->getError('email_contacto') ?></p>
+                    <p class="error-text"><?= $validation->getError('email_contacto') ?></p>
                     <?php endif; ?>
                 </div>
-                <div>
-                    <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Teléfono</label>
-                    <input type="text" name="telefono" value="<?= old('telefono') ?>"
-                        class="w-full bg-slate-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-indigo-500 transition">
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="text" name="telefono" value="<?= old('telefono') ?>" placeholder="+56 9 ...">
                 </div>
             </div>
-
         </div>
 
-        <div class="mt-8">
-            <label class="block text-[10px] font-black uppercase text-slate-400 mb-2">Historia / Descripción</label>
-            <textarea name="descripcion" rows="3"
-                class="w-full bg-slate-50 border-none rounded-2xl p-4 focus:ring-2 focus:ring-indigo-500 transition"><?= old('descripcion') ?></textarea>
+        <div class="form-section mt-8">
+            <label class="label-left">Historia / Descripción</label>
+            <textarea name="descripcion" rows="3" class="neon-textarea"><?= old('descripcion') ?></textarea>
         </div>
 
-        <div class="mt-10 flex justify-end">
-            <button type="submit"
-                class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-2xl font-black uppercase tracking-tighter transition shadow-xl flex items-center gap-3">
-                <i data-lucide="save" class="w-5 h-5"></i>
+        <div class="form-footer">
+            <button type="submit" class="btn-neon-save">
+                <i data-lucide="save"></i>
                 Guardar Institución
             </button>
         </div>

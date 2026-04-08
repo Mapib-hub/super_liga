@@ -1,0 +1,182 @@
+/* Contenedor Principal */
+#contenedor-temporadas {
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que las tarjetas bajen a la siguiente línea */
+}
+
+/* Tu clase personalizada para el ancho */
+.tarjeta_cont {
+  width: 32.33%; /* Tres por fila con un pequeño margen */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* La Tarjeta Base (Estilo Neon Dark) */
+.tarjeta_cont .card {
+  background-color: #1a1a1a; /* Fondo casi negro */
+  border: 1px solid #333;
+  border-radius: 15px;
+  color: #eee;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  min-height: 220px;
+  overflow: hidden;
+}
+
+/* Efecto Hover: Glow Neon Azul */
+.tarjeta_cont .card:hover {
+  transform: translateY(-10px);
+  border-color: #00d4ff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+}
+
+/* ESTILO TEMPORADA ACTUAL (Neon Fucsia/Violeta) */
+/* Usamos .border-success porque es la clase que pones en el PHP */
+.tarjeta_cont .card.border-success {
+  border: 2px solid #ff00ff !important;
+  background: linear-gradient(145deg, #1a1a1a, #2d0221);
+  box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+
+.tarjeta_cont .card.border-success:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.6);
+}
+
+/* Ajuste del Badge Neón */
+.badge.bg-success {
+  background-color: #ff00ff !important;
+  animation: pulse-neon 2s infinite;
+}
+
+/* El Indicador de Estado Actual */
+.btn-actual-status {
+  display: inline-block;
+  background-color: rgba(255, 0, 255, 0.1); /* Fondo fucsia muy suave */
+  color: #ff00ff;
+  border: 1px solid #ff00ff;
+  border-radius: 50px; /* Forma de píldora */
+  padding: 5px 20px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 10px rgba(255, 0, 255, 0.2),
+    inset 0 0 5px rgba(255, 0, 255, 0.2);
+  animation: pulse-status 2s infinite;
+  cursor: default;
+  user-select: none;
+}
+
+/* El icono giratorio dentro del status */
+.btn-actual-status i {
+  font-size: 0.7rem;
+  vertical-align: middle;
+}
+
+/* Animación de Pulso Pro */
+@keyframes pulse-status {
+  0% {
+    box-shadow:
+      0 0 5px rgba(255, 0, 255, 0.5),
+      inset 0 0 5px rgba(255, 0, 255, 0.2);
+    border-color: #ff00ff;
+    color: #ff00ff;
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(255, 0, 255, 0.8),
+      inset 0 0 10px rgba(255, 0, 255, 0.4);
+    border-color: #ff77ff;
+    color: #fff; /* Brilla a blanco en el pico del pulso */
+  }
+  100% {
+    box-shadow:
+      0 0 5px rgba(255, 0, 255, 0.5),
+      inset 0 0 5px rgba(255, 0, 255, 0.2);
+    border-color: #ff00ff;
+    color: #ff00ff;
+  }
+}
+
+/* Títulos y Botones */
+.fw-bold {
+  color: #fff !important;
+}
+.text-muted {
+  color: #888 !important;
+}
+/* Contenedor de botones para que se vean ordenados */
+.tarjeta_cont .mt-auto {
+  margin-top: auto !important;
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 8px; /* Espacio entre botones */
+  flex-wrap: wrap;
+}
+
+/* Estilo Base para todos los botones de la tarjeta */
+.tarjeta_cont .btn-sm {
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 12px;
+  transition: all 0.3s ease;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Boton ACTIVAR (Verde Esmeralda Neon) */
+.btn-outline-success {
+  border: 1px solid #00ff88 !important;
+  color: #00ff88 !important;
+  box-shadow: inset 0 0 5px rgba(0, 255, 136, 0.2);
+}
+
+.btn-outline-success:hover {
+  background: #00ff88 !important;
+  color: #000 !important;
+  box-shadow:
+    0 0 15px #00ff88,
+    0 0 30px rgba(0, 255, 136, 0.5) !important;
+}
+
+/* Boton EDITAR (Azul Electrico Neon) */
+.btn-outline-primary {
+  border: 1px solid #00d4ff !important;
+  color: #00d4ff !important;
+  box-shadow: inset 0 0 5px rgba(0, 212, 255, 0.2);
+}
+
+.btn-outline-primary:hover {
+  background: #00d4ff !important;
+  color: #000 !important;
+  box-shadow:
+    0 0 15px #00d4ff,
+    0 0 30px rgba(0, 212, 255, 0.5) !important;
+}
+
+/* Boton BORRAR (Rojo Sangre/Neon) */
+.btn-outline-danger {
+  border: 1px solid #ff4b2b !important;
+  color: #ff4b2b !important;
+  box-shadow: inset 0 0 5px rgba(255, 75, 43, 0.2);
+}
+
+.btn-outline-danger:hover {
+  background: #ff4b2b !important;
+  color: #fff !important;
+  box-shadow:
+    0 0 15px #ff4b2b,
+    0 0 30px rgba(255, 75, 43, 0.5) !important;
+}
+
+/* Efecto de click para todos */
+.tarjeta_cont .btn-sm:active {
+  transform: scale(0.95);
+  filter: brightness(1.2);
+}

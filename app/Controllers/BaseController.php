@@ -53,27 +53,26 @@ abstract class BaseController extends Controller
         return null;
     }
 
-    protected function _redireccionarHtmx(string $url, string $mensaje, string $tipo = 'success')
+    protected function _redireccionarHtmx($url, $mensaje, $tipo = 'success')
     {
-        if ($this->request->hasHeader('HX-Request')) {
-            // Configuramos la redirección de HTMX como un objeto JSON
-            $location = json_encode([
-                'path'   => $url,
-                'target' => '#main-content', // Le decimos exactamente dónde inyectar el listado
-                'push'   => true             // Esto actualiza la URL en la barra del navegador
-            ]);
+        $titulo = ($tipo === 'success') ? '¡Hecho!' : 'Atención';
 
-            return $this->response
-                ->setHeader('HX-Location', $location)
-                ->setHeader('HX-Trigger', json_encode([
-                    'swal:fire' => [
-                        'title' => ($tipo === 'success') ? '¡Logrado!' : 'Atención',
-                        'text'  => $mensaje,
-                        'icon'  => $tipo
-                    ]
-                ]));
+        if ($this->request->hasHeader('HX-Request')) {
+            // No uso flashdata, no uso HX-Redirect
+            return "
+        <script>
+            Swal.fire({
+                title: '{$titulo}',
+                text: '{$mensaje}',
+                icon: '{$tipo}'
+            }).then(() => {
+                document.body.innerHTML = '<div style=\"text-align:center;padding:50px\">Redirigiendo...</div>';
+                window.location.href = '" . base_url($url) . "';
+            });
+        </script>
+        ";
         }
 
-        return redirect()->to($url)->with($tipo, $mensaje);
+        return redirect()->to(base_url($url))->with($tipo, $mensaje);
     }
 }

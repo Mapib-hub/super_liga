@@ -15,7 +15,7 @@ class TemporadaModel extends Model
     // Fechas automáticas
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
-    protected $updatedField  = ''; // No tienes updated_at en tu esquema
+    protected $updatedField  = 'updated_at'; // No tienes updated_at en tu esquema
 
     /**
      * Método para establecer la temporada actual y desactivar el resto

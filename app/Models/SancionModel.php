@@ -8,10 +8,6 @@ class SancionModel extends Model
 {
     protected $table      = 'sanciones'; // Asegúrate que este sea el nombre real
     protected $primaryKey = 'id';
-
-    // ESTO ES LO QUE ESTÁ DANDO ERROR:
-    protected $useTimestamps = false;
-
     // También asegúrate de que estos campos coincidan con tu DB
     protected $allowedFields = [
         'partido_id',
@@ -22,4 +18,6 @@ class SancionModel extends Model
         'observacion',
         'estado'
     ];
+    // ESTO ES LO QUE ESTÁ DANDO ERROR:
+    protected $useTimestamps = true;
 }
